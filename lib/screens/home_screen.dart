@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text(
           "Contador de Baggets",
-          style: TextStyle(color: ColorsUtils.grey),
+          style: TextStyle(fontFamily: 'PressStart2P',fontSize: 11.5, color: ColorsUtils.grey),
         ),
         actions: [
           Container(
