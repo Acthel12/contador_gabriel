@@ -1,8 +1,55 @@
 import 'package:contador_gabriel/utils/colors_utils.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int value = 0;
+
+  String teto = 'assets/kasane_teto_0.png';
+  String bagget = 'assets/bagget_0.png';
+
+  void seleccionarImagen() {
+    if (value == 0) {
+      teto = 'assets/kasane_teto_0.png';
+      bagget = 'assets/bagget_0.png';
+    } else if (value == 1) {
+      teto = 'assets/kasane_teto_1.png';
+      bagget = 'assets/bagget_1.png';
+    } else if (value == 5) {
+      teto = 'assets/kasane_teto_2.png';
+      bagget = 'assets/bagget_2.png';
+    } else if (value == 10) {
+      teto = 'assets/kasane_teto_3.png';
+      bagget = 'assets/bagget_3.png';
+    } else if (value == 100) {
+      teto = 'assets/kasane_teto_4.png';
+      bagget = 'assets/bagget_4.png';
+    }
+  }
+
+  void sumar() {
+    value++;
+    seleccionarImagen();
+    setState(() {});
+  }
+
+  void restar() {
+    (value - 1) >= 0 ? value-- : value = 0;
+    seleccionarImagen();
+    setState(() {});
+  }
+
+  void reset() {
+    value = 0;
+    seleccionarImagen();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +61,10 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(color: ColorsUtils.grey),
         ),
         actions: [
-          Image(image: AssetImage("assets/kasane_teto_0.png"))
+          Container(
+            margin: const EdgeInsets.only(right: 50),
+            child: Image(image: AssetImage(teto)),
+          ),
         ],
         backgroundColor: ColorsUtils.purple,
       ),
@@ -34,18 +84,23 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     //const Text("Contador", style: TextStyle(color: ColorsUtils.purple, fontSize: 20),),
                     const Spacer(),
-                    const Text(
-                      "0",
-                      style: TextStyle(color: ColorsUtils.purple, fontSize: 50),
+                    Text(
+                      "$value",
+                      style: const TextStyle(
+                        color: ColorsUtils.purple,
+                        fontSize: 50,
+                      ),
                     ),
                     const Spacer(),
-                    Image(image: AssetImage('assets/bagget_0.png')),
+                    Image(image: AssetImage(bagget)),
                     const Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            sumar();
+                          },
                           label: const Text('Suma'),
                           icon: const Icon(Icons.add),
                           style: ElevatedButton.styleFrom(
@@ -54,7 +109,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            restar();
+                          },
                           label: const Text('Resta'),
                           icon: const Icon(Icons.remove),
                           style: ElevatedButton.styleFrom(
@@ -64,8 +121,11 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 5),
                     OutlinedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        reset();
+                      },
                       label: const Text("Reset"),
                       icon: const Icon(Icons.restart_alt),
                       style: OutlinedButton.styleFrom(
