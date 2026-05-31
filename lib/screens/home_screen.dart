@@ -18,16 +18,16 @@ class _HomeScreenState extends State<HomeScreen> {
     if (value == 0) {
       teto = 'assets/kasane_teto_0.png';
       bagget = 'assets/bagget_0.png';
-    } else if (value == 1) {
+    } else if (value >= 1 && value < 5) {
       teto = 'assets/kasane_teto_1.png';
       bagget = 'assets/bagget_1.png';
-    } else if (value == 5) {
+    } else if (value >= 5 && value < 10) {
       teto = 'assets/kasane_teto_2.png';
       bagget = 'assets/bagget_2.png';
-    } else if (value == 10) {
+    } else if (value >= 10 && value < 100) {
       teto = 'assets/kasane_teto_3.png';
       bagget = 'assets/bagget_3.png';
-    } else if (value == 100) {
+    } else if (value >= 100) {
       teto = 'assets/kasane_teto_4.png';
       bagget = 'assets/bagget_4.png';
     }
@@ -68,117 +68,132 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: ColorsUtils.purple,
       ),
-      body: Center(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: ColorsUtils.grey,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 55),
-              child: Center(
-                child: Column(
-                  children: [
-                    //const Text("Contador", style: TextStyle(color: ColorsUtils.purple, fontSize: 20),),
-                    const Spacer(),
-                    Text(
-                      "$value",
-                      style: const TextStyle(
-                        color: ColorsUtils.purple,
-                        fontSize: 50,
-                      ),
-                    ),
-                    const Spacer(),
-                    Image(image: AssetImage(bagget)),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            sumar();
-                          },
-                          label: const Text('Suma'),
-                          icon: const Icon(Icons.add),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsUtils.purple,
-                            foregroundColor: ColorsUtils.grey,
-                          ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background_home.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(236, 167, 189, 0.5),
+
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                margin: const EdgeInsets.symmetric(
+                  vertical: 100,
+                  horizontal: 55,
+                ),
+                child: Center(
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "$value",
+                        style: const TextStyle(
+                          color: ColorsUtils.purple,
+                          fontSize: 50,
                         ),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            restar();
-                          },
-                          label: const Text('Resta'),
-                          icon: const Icon(Icons.remove),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsUtils.purple,
-                            foregroundColor: ColorsUtils.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    OutlinedButton.icon(
-                      onPressed: () {
-                        reset();
-                      },
-                      label: const Text("Reset"),
-                      icon: const Icon(Icons.restart_alt),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: ColorsUtils.purple,
-                        side: const BorderSide(color: ColorsUtils.purple),
                       ),
-                    ),
-                    const Spacer(),
-                  ],
+                      const Spacer(),
+                      Image(image: AssetImage(bagget)),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              sumar();
+                            },
+                            label: const Text('Suma'),
+                            icon: const Icon(Icons.add),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsUtils.purple,
+                              foregroundColor: ColorsUtils.grey,
+                            ),
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              restar();
+                            },
+                            label: const Text('Resta'),
+                            icon: const Icon(Icons.remove),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorsUtils.purple,
+                              foregroundColor: ColorsUtils.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      OutlinedButton.icon(
+                        onPressed: () {
+                          reset();
+                        },
+                        label: const Text("Reset"),
+                        icon: const Icon(Icons.restart_alt),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: ColorsUtils.purple,
+                          side: const BorderSide(color: ColorsUtils.purple),
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const Positioned(
-              top: 50,
-              left: 0,
-              child: Image(
-                image: AssetImage('assets/sticker_1.png'),
-                height: 100,
-                width: 100,
+              const Positioned(
+                top: 50,
+                left: 0,
+                child: Image(
+                  image: AssetImage('assets/sticker_1.png'),
+                  height: 100,
+                  width: 100,
+                ),
               ),
-            ),
-            const Positioned(
-              top: 50,
-              right: 0,
-              child: Image(
-                image: AssetImage('assets/sticker_2.png'),
-                height: 100,
-                width: 100,
+              const Positioned(
+                top: 50,
+                right: 0,
+                child: Image(
+                  image: AssetImage('assets/sticker_2.png'),
+                  height: 100,
+                  width: 100,
+                ),
               ),
-            ),
-            const Positioned(
-              bottom: 50,
-              right: 0,
-              child: Image(
-                image: AssetImage('assets/sticker_3.png'),
-                height: 100,
-                width: 100,
+              const Positioned(
+                bottom: 50,
+                right: 0,
+                child: Image(
+                  image: AssetImage('assets/sticker_3.png'),
+                  height: 100,
+                  width: 100,
+                ),
               ),
-            ),
-            const Positioned(
-              bottom: 50,
-              left: 0,
-              child: Image(
-                image: AssetImage('assets/sticker_4.png'),
-                height: 100,
-                width: 100,
+              const Positioned(
+                bottom: 50,
+                left: 0,
+                child: Image(
+                  image: AssetImage('assets/sticker_4.png'),
+                  height: 100,
+                  width: 100,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/info');
+        },
         backgroundColor: ColorsUtils.purple,
         foregroundColor: ColorsUtils.pink,
         child: const Icon(Icons.info),
