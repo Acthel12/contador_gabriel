@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     OutlinedButton.icon(
                       onPressed: () {
                         reset();
