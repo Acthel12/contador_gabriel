@@ -96,10 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: ColorsUtils.red,
       appBar: AppBar(
         title: const Text(
-          "Contador de Baggets",
+          "Contador de Baguettes",
           style: TextStyle(
             fontFamily: 'PressStart2P',
-            fontSize: 11.5,
+            fontSize: 10,
             color: ColorsUtils.grey,
           ),
         ),
