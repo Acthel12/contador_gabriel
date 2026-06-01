@@ -46,12 +46,21 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (BuildContext context) {
           return AlertDialog(
             backgroundColor: ColorsUtils.grey,
-            title: const Text("¡Baguettes agotados! \n 🥖"),
+            title: const Text("¡Baguettes agotados! \n 🥖",style: TextStyle(
+                          fontFamily: 'PressStart2P',
+                          color: ColorsUtils.purple,
+                          fontSize: 20,
+                        )),
             content: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "¡Ya te llevaste todos mis baguettes! ¿Ahora qué quieres, mis taladros?",
+                  style:  TextStyle(
+                          fontFamily: 'PressStart2P',
+                          color: ColorsUtils.purple,
+                          fontSize: 11,
+                        )
                 ),
                 Image(image: AssetImage('assets/sad_teto.png')),
               ],
