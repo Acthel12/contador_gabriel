@@ -1,4 +1,5 @@
 import 'package:contador_gabriel/utils/colors_utils.dart';
+import 'package:contador_gabriel/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,47 +42,54 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void restar(BuildContext context) {
     if (value == 0) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: ColorsUtils.grey,
-            title: const Text("¡Baguettes agotados! \n 🥖",style: TextStyle(
-                          fontFamily: 'PressStart2P',
-                          color: ColorsUtils.purple,
-                          fontSize: 20,
-                        )),
-            content: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "¡Ya te llevaste todos mis baguettes! ¿Ahora qué quieres, mis taladros?",
-                  style:  TextStyle(
-                          fontFamily: 'PressStart2P',
-                          color: ColorsUtils.purple,
-                          fontSize: 11,
-                        )
-                ),
-                Image(image: AssetImage('assets/sad_teto.png')),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Aceptar'),
-              ),
-            ],
-          );
-        },
-      );
+      alertaResta(context);
       return;
     } else {
       value--;
     }
     seleccionarImagen();
     setState(() {});
+  }
+
+  Future<dynamic> alertaResta(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: ColorsUtils.grey,
+          title: const Text(
+            "¡Baguettes agotados! \n 🥖",
+            style: TextStyle(
+              fontFamily: 'PressStart2P',
+              color: ColorsUtils.purple,
+              fontSize: 20,
+            ),
+          ),
+          content: const Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "¡Ya te llevaste todos mis baguettes! ¿Ahora qué quieres, mis taladros?",
+                style: TextStyle(
+                  fontFamily: 'PressStart2P',
+                  color: ColorsUtils.purple,
+                  fontSize: 11,
+                ),
+              ),
+              Image(image: AssetImage('assets/sad_teto.png')),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void reset() {
@@ -111,131 +119,71 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         backgroundColor: ColorsUtils.purple,
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/background_home.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Stack(
-            clipBehavior: Clip.none,
+      body: ScreenBackgroundAndStrickers(
+        background: 'assets/background_home.png',
+        containerChild: Center(
+          child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: const BoxDecoration(
-                  color: Color.fromRGBO(236, 167, 189, 0.5),
-
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+              const Spacer(),
+              Text(
+                "$value",
+                style: const TextStyle(
+                  fontFamily: 'PressStart2P',
+                  color: ColorsUtils.purple,
+                  fontSize: 50,
                 ),
-                margin: const EdgeInsets.symmetric(
-                  vertical: 100,
-                  horizontal: 55,
-                ),
-                child: Center(
-                  child: Column(
-                    children: [
-                      const Spacer(),
-                      Text(
-                        "$value",
-                        style: const TextStyle(
-                          fontFamily: 'PressStart2P',
-                          color: ColorsUtils.purple,
-                          fontSize: 50,
-                        ),
-                      ),
-                      const Spacer(),
-                      SizedBox(
-                        height: 200,
-                        width: 200,
-                        child: Image(image: AssetImage(bagget),fit: BoxFit.cover,)),
-                      const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              sumar();
-                            },
-                            label: const Text('Suma'),
-                            icon: const Icon(Icons.add),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorsUtils.purple,
-                              foregroundColor: ColorsUtils.grey,
-                            ),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              restar(context);
-                            },
-                            label: const Text('Resta'),
-                            icon: const Icon(Icons.remove),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorsUtils.purple,
-                              foregroundColor: ColorsUtils.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      OutlinedButton.icon(
-                        onPressed: () {
-                          reset();
-                        },
-                        label: const Text("Reset"),
-                        icon: const Icon(Icons.restart_alt),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: ColorsUtils.purple,
-                          side: const BorderSide(color: ColorsUtils.purple),
-                        ),
-                      ),
-                      const Spacer(),
-                    ],
+              ),
+              const Spacer(),
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: Image(image: AssetImage(bagget), fit: BoxFit.cover),
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      sumar();
+                    },
+                    label: const Text('Suma'),
+                    icon: const Icon(Icons.add),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorsUtils.purple,
+                      foregroundColor: ColorsUtils.grey,
+                    ),
                   ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      restar(context);
+                    },
+                    label: const Text('Resta'),
+                    icon: const Icon(Icons.remove),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorsUtils.purple,
+                      foregroundColor: ColorsUtils.grey,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 5),
+              OutlinedButton.icon(
+                onPressed: () {
+                  reset();
+                },
+                label: const Text("Reset"),
+                icon: const Icon(Icons.restart_alt),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: ColorsUtils.purple,
+                  side: const BorderSide(color: ColorsUtils.purple),
                 ),
               ),
-              const Positioned(
-                top: 50,
-                left: 0,
-                child: Image(
-                  image: AssetImage('assets/sticker_1.png'),
-                  height: 100,
-                  width: 100,
-                ),
-              ),
-              const Positioned(
-                top: 50,
-                right: 0,
-                child: Image(
-                  image: AssetImage('assets/sticker_2.png'),
-                  height: 100,
-                  width: 100,
-                ),
-              ),
-              const Positioned(
-                bottom: 50,
-                right: 0,
-                child: Image(
-                  image: AssetImage('assets/sticker_3.png'),
-                  height: 100,
-                  width: 100,
-                ),
-              ),
-              const Positioned(
-                bottom: 50,
-                left: 0,
-                child: Image(
-                  image: AssetImage('assets/sticker_4.png'),
-                  height: 100,
-                  width: 100,
-                ),
-              ),
+              const Spacer(),
             ],
           ),
         ),
+        opacity: 0.5,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
