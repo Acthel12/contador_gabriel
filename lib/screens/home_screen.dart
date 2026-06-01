@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: ColorsUtils.grey,
             title: const Text("¡Baguettes agotados! \n 🥖"),
             content: const Column(
               mainAxisSize: MainAxisSize.min,
