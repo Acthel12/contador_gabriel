@@ -39,8 +39,37 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  void restar() {
-    (value - 1) >= 0 ? value-- : value = 0;
+  void restar(BuildContext context) {
+    if (value == 0) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("¡Baguettes agotados! \n 🥖"),
+            content: const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "¡Ya te llevaste todos mis baguettes! ¿Ahora qué quieres, mis taladros?",
+                ),
+                Image(image: AssetImage('assets/sad_teto.png')),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Aceptar'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    } else {
+      value--;
+    }
     seleccionarImagen();
     setState(() {});
   }
@@ -58,7 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text(
           "Contador de Baggets",
-          style: TextStyle(fontFamily: 'PressStart2P',fontSize: 11.5, color: ColorsUtils.grey),
+          style: TextStyle(
+            fontFamily: 'PressStart2P',
+            fontSize: 11.5,
+            color: ColorsUtils.grey,
+          ),
         ),
         actions: [
           Container(
@@ -123,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           ElevatedButton.icon(
                             onPressed: () {
-                              restar();
+                              restar(context);
                             },
                             label: const Text('Resta'),
                             icon: const Icon(Icons.remove),
